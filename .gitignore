@@ -12,5 +12,3 @@
 !/log/.keep
 /tmp
 .byebug_history
-Gemfile.lock
-config/secrets.yml

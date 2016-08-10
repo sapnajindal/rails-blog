@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
-  http_basic_authenticate_with name: "sapna", password: "password", except: [:index, :show]
+
+  before_action :authenticate_user!
 
   def index
     @blogs = Blog.all()
@@ -14,6 +15,7 @@ class BlogsController < ApplicationController
   end
 
   def create
+    puts 'current user' + current_user
     @blog = Blog.new(get_params())
     if @blog.save
       redirect_to @blog

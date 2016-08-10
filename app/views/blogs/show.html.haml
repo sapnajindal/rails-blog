@@ -1,0 +1,13 @@
+%p
+  %strong Title:
+  = @blog.title
+%p
+  %strong Text:
+  = @blog.text
+%h2 Comments
+= render @blog.comments
+%h2 Add a comment:
+= render 'comments/form'
+= link_to 'Edit', edit_blog_path(@blog)
+= link_to 'Back', blogs_path
+

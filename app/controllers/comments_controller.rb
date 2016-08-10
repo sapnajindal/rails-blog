@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  http_basic_authenticate_with name: "sapna", password: "password", only: :destroy
+  before_action :authenticate_user!
 
   def create
     @blog = Blog.find(params[:blog_id])

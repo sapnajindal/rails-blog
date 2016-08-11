@@ -19,8 +19,6 @@ gem 'devise'
 gem 'annotate', '~> 2.7.1'
 gem "rails_best_practices"
 gem 'will_paginate', '~> 3.1.0'
-gem "paperclip", "~> 5.0.0"
-gem 'aws-sdk'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

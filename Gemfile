@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'haml', '~> 4.0.5'
 gem "haml-rails", "~> 0.9"
 gem 'devise'
+gem 'annotate', '~> 2.7.1'
+gem "rails_best_practices"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

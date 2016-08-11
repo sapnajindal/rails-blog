@@ -1,7 +1,38 @@
+# == Route Map
+#
+#                   Prefix Verb   URI Pattern                            Controller#Action
+#         new_user_session GET    /users/sign_in(.:format)               devise/sessions#new
+#             user_session POST   /users/sign_in(.:format)               devise/sessions#create
+#     destroy_user_session DELETE /users/sign_out(.:format)              devise/sessions#destroy
+#            user_password POST   /users/password(.:format)              devise/passwords#create
+#        new_user_password GET    /users/password/new(.:format)          devise/passwords#new
+#       edit_user_password GET    /users/password/edit(.:format)         devise/passwords#edit
+#                          PATCH  /users/password(.:format)              devise/passwords#update
+#                          PUT    /users/password(.:format)              devise/passwords#update
+# cancel_user_registration GET    /users/cancel(.:format)                devise/registrations#cancel
+#        user_registration POST   /users(.:format)                       devise/registrations#create
+#    new_user_registration GET    /users/sign_up(.:format)               devise/registrations#new
+#   edit_user_registration GET    /users/edit(.:format)                  devise/registrations#edit
+#                          PATCH  /users(.:format)                       devise/registrations#update
+#                          PUT    /users(.:format)                       devise/registrations#update
+#                          DELETE /users(.:format)                       devise/registrations#destroy
+#            blog_comments POST   /blogs/:blog_id/comments(.:format)     comments#create
+#             blog_comment DELETE /blogs/:blog_id/comments/:id(.:format) comments#destroy
+#                    blogs GET    /blogs(.:format)                       blogs#index
+#                          POST   /blogs(.:format)                       blogs#create
+#                 new_blog GET    /blogs/new(.:format)                   blogs#new
+#                edit_blog GET    /blogs/:id/edit(.:format)              blogs#edit
+#                     blog GET    /blogs/:id(.:format)                   blogs#show
+#                          PATCH  /blogs/:id(.:format)                   blogs#update
+#                          PUT    /blogs/:id(.:format)                   blogs#update
+#                          DELETE /blogs/:id(.:format)                   blogs#destroy
+#                     root GET    /                                      blogs#index
+#
+
 Rails.application.routes.draw do
   devise_for :users
   resources :blogs do
-    resources :comments
+    resources :comments, only: [:create, :destroy]
   end
 
   root 'blogs#index'

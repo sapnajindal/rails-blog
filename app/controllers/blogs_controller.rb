@@ -4,7 +4,8 @@ class BlogsController < ApplicationController
 
   def index
     a
-    @blogs = Blog.all
+    @blogs = Blog.paginate(page: params[:page], per_page: 2).order('created_at DESC')
+    # @blogs = Blog.all
   end
 
   def new

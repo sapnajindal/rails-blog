@@ -1,5 +1,6 @@
 = link_to 'New blog', new_blog_path
 %h1 Listing Blogs
+= will_paginate(@blogs, params: {check: 'test'}, style: 'color:red', previous_label: 'back')
 %table
   %tr
     %th Title

@@ -1,0 +1,16 @@
+- if user_signed_in?
+  = link_to 'Blogs', blogs_path
+- else
+  %h1 Users
+  %table
+    %tr
+      %th Id
+      %th Email
+    - @current_users.each do |user|
+      %tr
+        %td= user.id
+        %td= user.email
+
+  = link_to('Login', new_user_session_path)
+
+

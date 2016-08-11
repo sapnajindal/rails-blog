@@ -15,7 +15,6 @@ class BlogsController < ApplicationController
   end
 
   def create
-    puts 'current user' + current_user
     @blog = Blog.new(get_params())
     if @blog.save
       redirect_to @blog
@@ -37,6 +36,8 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
+    @error = flash[:error]
+    @comment = Comment.new
   end
 
   def destroy

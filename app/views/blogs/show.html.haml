@@ -4,6 +4,13 @@
 %p
   %strong Text:
   = @blog.text
+- if @error && @error.any?
+  #error_explanation
+    %h2
+      This comment Is not saved because :
+    %ul
+      = @error
+
 %h2 Comments
 = render @blog.comments
 %h2 Add a comment:

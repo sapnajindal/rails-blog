@@ -1,18 +1,43 @@
+= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'
 = link_to 'New blog', new_blog_path
 %h1 Listing Blogs
 = will_paginate(@blogs, params: {check: 'test'}, style: 'color:red', previous_label: 'back')
+= search_form_for @q do |f|
+  = f.label 'Title'
+  = f.search_field :title_cont
+
+  = f.label :text_start
+  = f.search_field :text_start
+
+  = f.label 'startDate'
+  = f.search_field :created_at_gteq, id: 'startDate'
+
+  = f.label 'endDate'
+  = f.search_field :created_at_lteq, id: 'endDate'
+
+  = f.submit
+
+= will_paginate(@blogs, params: {check: 'test'}, style: 'color:red', previous_label: 'back')
 %table
   %tr
-    %th Title
-    %th Text
+    =sort_link(@q, :title, 'Title', default_order: :desc, hide_indicator: true)
+    =sort_link(@q, :text, 'Text', default_order: :desc, hide_indicator: true)
+    %th createdAt
   - @blogs.each do |blog|
     %tr
       %td= blog.title
       %td= blog.text
+      %td= blog.created_at
       %td= link_to 'Show', blog_path(blog)
       %td= link_to 'Edit', edit_blog_path(blog)
       %td= link_to 'Destroy', blog_path(blog), |
           method: :delete,                    |
           data: { confirm: 'Are you sure?' }  |
 
+:javascript
+  $(document).ready( function() {
+    $('#startDate, #endDate').datepicker({
+      dateFormat: 'yy-mm-dd'
+    })
+  })
 

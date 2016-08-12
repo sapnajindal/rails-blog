@@ -4,14 +4,17 @@
 %p
   %strong Text:
   = @blog.text
-- if @error && @error.any?
-  #error_explanation
-    %h2
-      This comment Is not saved because :
-    %ul
-      = @error
 
 %h2 Comments
+- if @comment && @comment.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@comment.errors.count, "error")
+      prohibited
+      this comment from being saved:
+    %ul
+      - @comment.errors.full_messages.each do |msg|
+        %li= msg
 = render @blog.comments
 %h2 Add a comment:
 = render 'comments/form', blog: @blog

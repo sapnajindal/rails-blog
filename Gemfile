@@ -21,6 +21,7 @@ gem "rails_best_practices"
 gem 'will_paginate', '~> 3.1.0'
 gem "paperclip", "~> 5.0.0"
 gem 'aws-sdk'
+gem 'ransack'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

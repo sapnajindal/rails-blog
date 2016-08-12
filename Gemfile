@@ -16,6 +16,21 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'haml', '~> 4.0.5'
 gem "haml-rails", "~> 0.9"
 gem 'devise'
+<<<<<<< Updated upstream
+||||||| merged common ancestors
+gem 'annotate', '~> 2.7.1'
+gem "rails_best_practices"
+gem 'will_paginate', '~> 3.1.0'
+gem "paperclip", "~> 5.0.0"
+gem 'aws-sdk'
+=======
+gem 'annotate', '~> 2.7.1'
+gem "rails_best_practices"
+gem 'will_paginate', '~> 3.1.0'
+gem "paperclip", "~> 5.0.0"
+gem 'aws-sdk'
+gem 'ransack'
+>>>>>>> Stashed changes
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

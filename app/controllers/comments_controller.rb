@@ -3,9 +3,9 @@ class CommentsController < ApplicationController
 
   def create
     @blog = Blog.find(params[:blog_id])
-    @comment = @blog.comments.create(comment_params)
-    flash[:error] = @comment.errors.as_json
-    redirect_to @blog
+    @comment = @blog.comments.new(comment_params)
+    @blog.save
+    render 'blogs/show'
   end
 
   def destroy

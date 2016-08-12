@@ -1,11 +1,12 @@
-%p
-  %strong Commenter:
-  = comment.commenter
-%p
-  %strong Comment:
-  = comment.body
-%p
-  %strong Date:
-  = (comment.created_at + (5*60).minutes + 30.minutes).strftime("%F %T")
-= link_to 'Delete comment', [comment.blog, comment], |
-  method: :delete                                    |
+- if comment.id
+  %p
+    %strong Commenter:
+    = comment.commenter
+  %p
+    %strong Comment:
+    = comment.body
+  %p
+    %strong Date:
+    = comment.created_at ? (comment.created_at + (5*60).minutes + 30.minutes).strftime("%F %T") : ''
+  = link_to 'Delete comment', [comment.blog, comment], |
+    method: :delete                                    |

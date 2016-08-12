@@ -1,3 +1,4 @@
+# -*- SkipSchemaAnnotations
 class Comment < ActiveRecord::Base
   belongs_to :blog
   validates :commenter, presence: true, length: { minimum: 5 }

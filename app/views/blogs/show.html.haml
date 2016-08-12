@@ -17,7 +17,7 @@
         %li= msg
 = render @blog.comments
 %h2 Add a comment:
-= render 'comments/form'
+= render 'comments/form', blog: @blog
 = link_to 'Edit', edit_blog_path(@blog)
 = link_to 'Back', blogs_path
 

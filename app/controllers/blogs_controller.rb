@@ -55,4 +55,21 @@ class BlogsController < ApplicationController
     def get_params
       params.require(:blog).permit(:title, :text)
     end
+
+    # testing binding of caller gem
+    def a
+      var = 10
+      b
+      puts '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+      puts var
+    end
+
+    def b
+      c
+    end
+
+    def c
+      binding.of_caller(2).eval('var = :hello')
+    end
+
 end

@@ -4,7 +4,11 @@ class BlogsController < ApplicationController
 
   def index
     a
-    @blogs = Blog.all
+    puts '>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<'
+    puts params.as_json
+    @q = Blog.ransack(params[:q])
+    puts @q.result.as_json
+    @blogs = @q.result.paginate(page: params[:page], per_page: 2).order('created_at DESC')
   end
 
   def new
@@ -37,7 +41,6 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
-    @error = flash[:error]
     @comment = Comment.new
   end
 

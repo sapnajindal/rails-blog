@@ -1,10 +1,11 @@
 class CommentsController < ApplicationController
-  http_basic_authenticate_with name: "sapna", password: "password", only: :destroy
+  before_action :authenticate_user!
 
   def create
     @blog = Blog.find(params[:blog_id])
-    @comment = @blog.comments.create(comment_params)
-    redirect_to @blog
+    @comment = @blog.comments.new(comment_params)
+    @blog.save
+    render 'blogs/show'
   end
 
   def destroy

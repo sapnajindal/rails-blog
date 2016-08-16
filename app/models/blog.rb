@@ -10,7 +10,7 @@
 #
 
 class Blog < ActiveRecord::Base
-  has_many :comments, dependent: :destroy
+  has_many :comments, dependent: :delete_all
   validates :title, presence: true, length: { minimum: 5 }
   validates :text, presence: true, length: { in: 6..200 }
 end

@@ -3,11 +3,7 @@ class BlogsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    a
-    puts '>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<'
-    puts params.as_json
     @q = Blog.ransack(params[:q])
-    puts @q.result.as_json
     @blogs = @q.result.paginate(page: params[:page], per_page: 2).order('created_at DESC')
   end
 
@@ -16,13 +12,13 @@ class BlogsController < ApplicationController
   end
 
   def edit
-    @blog = Blog.find(params[:id])
+    get_blog
   end
 
   def create
     @blog = Blog.new(get_params())
     if @blog.save
-      redirect_to @blog
+      redirect_to @blog, flash: {message: 'Blog Created Successfully!'}
     else
       render 'new'
     end
@@ -30,30 +26,31 @@ class BlogsController < ApplicationController
   end
 
   def update
-    @blog = Blog.find(params[:id])
-
+    get_blog
     if @blog.update(get_params)
-      redirect_to @blog
+      redirect_to @blog, flash: {message: 'Blog updated Successfully!'}
     else
       render 'edit'
     end
   end
 
   def show
-    @blog = Blog.find(params[:id])
+    get_blog
     @comment = Comment.new
   end
 
   def destroy
-    @blog = Blog.find(params[:id])
+    get_blog
     @blog.destroy
-
-    redirect_to blogs_path
+    redirect_to blogs_path, flash: {message: 'Blog destroyed!'}
   end
 
   private
     def get_params
       params.require(:blog).permit(:title, :text)
+    end
+    def get_blog
+      @blog = Blog.find(params[:id])
     end
 
     # testing binding of caller gem

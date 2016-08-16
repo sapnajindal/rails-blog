@@ -8,24 +8,24 @@
   = f.label :text_start
   = f.search_field :text_start
 
-  = f.label 'startDate'
+  = f.label 'Start Date'
   = f.search_field :created_at_gteq
 
-  = f.label 'endDate'
+  = f.label 'End Date'
   = f.search_field :created_at_lteq
 
   = f.submit
 
-%table
-  %tr
+%table{:style=>"border: 1px; width: 50%"}
+  %tr{style: 'width: 200%'}
     =sort_link(@q, :title, 'Title', default_order: :desc, hide_indicator: true)
     =sort_link(@q, :text, 'Text', default_order: :desc, hide_indicator: true)
-    %th createdAt
+    =sort_link(@q, :created_at, 'Date', default_order: :desc, hide_indicator: true)
   - @blogs.each do |blog|
     %tr
       %td= blog.title
       %td= blog.text
-      %td= blog.created_at
+      %td= blog.created_at ? blog.created_at.strftime("%I:%M %p, #{blog.created_at.day.ordinalize} %h, %Y") : ''
       %td= link_to 'Show', blog_path(blog)
       %td= link_to 'Edit', edit_blog_path(blog)
       %td= link_to 'Destroy', blog_path(blog), |

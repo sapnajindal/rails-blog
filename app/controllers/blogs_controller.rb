@@ -1,6 +1,7 @@
 class BlogsController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :get_blog,  only: [:edit, :update, :show, :destroy]
 
   def index
     @q = Blog.ransack(params[:q])
@@ -12,7 +13,6 @@ class BlogsController < ApplicationController
   end
 
   def edit
-    get_blog
   end
 
   def create
@@ -26,7 +26,6 @@ class BlogsController < ApplicationController
   end
 
   def update
-    get_blog
     if @blog.update(get_params)
       redirect_to @blog, flash: {message: 'Blog updated Successfully!'}
     else
@@ -35,12 +34,10 @@ class BlogsController < ApplicationController
   end
 
   def show
-    get_blog
     @comment = Comment.new
   end
 
   def destroy
-    get_blog
     @blog.destroy
     redirect_to blogs_path, flash: {message: 'Blog destroyed!'}
   end

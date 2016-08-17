@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :get_blog
 
   def create
-    get_blog
     @comment = @blog.comments.new(comment_params)
     if @blog.save
       redirect_to @blog
@@ -12,7 +12,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    get_blog
     @comment = @blog.comments.find(params[:id])
     @comment.destroy
     redirect_to @blog

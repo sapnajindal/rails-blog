@@ -22,6 +22,7 @@ module RailsBlog
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    config.paperclip_defaults = { storage: :s3, s3_credentials: { bucket: "staging-factory-consumer-payments", access_key_id: "AKIAIJ34YPTERI546J6A", secret_access_key: "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"}, s3_region: "ap-southeast-1", s3_host_name: "s3.amazonaws.com", s3_protocol: 'http', url: ":s3_domain_url", path: "/:class/:attachment/:id_partition/:style/:filename"}
+
+    config.paperclip_defaults = { storage: :s3, s3_credentials: { bucket: Rails.application.secrets.aws_bucket, access_key_id: Rails.application.secrets.aws_key, secret_access_key: Rails.application.secrets.aws_secret}, s3_region: Rails.application.secrets.aws_region, s3_host_name: "s3.amazonaws.com", s3_protocol: 'http', url: ":s3_domain_url", path: "/:class/:attachment/:id_partition/:style/:filename"}
   end
 end

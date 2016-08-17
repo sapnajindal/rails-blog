@@ -1,15 +1,17 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :get_blog
 
   def create
-    @blog = Blog.find(params[:blog_id])
     @comment = @blog.comments.new(comment_params)
-    @blog.save
-    render 'blogs/show'
+    if @blog.save
+      redirect_to @blog
+    else
+      render 'blogs/show'
+    end
   end
 
   def destroy
-    @blog = Blog.find(params[:blog_id])
     @comment = @blog.comments.find(params[:id])
     @comment.destroy
     redirect_to @blog
@@ -18,5 +20,8 @@ class CommentsController < ApplicationController
   private
     def comment_params
       params.require(:comment).permit(:commenter, :body)
+    end
+    def get_blog
+      @blog = Blog.find(params[:blog_id])
     end
 end

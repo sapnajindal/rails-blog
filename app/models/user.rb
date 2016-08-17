@@ -2,6 +2,10 @@
 #
 # Table name: users
 #
+#  avatar_content_type    :string(255)
+#  avatar_file_name       :string(255)
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
 #  created_at             :datetime         not null
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string(255)
@@ -27,4 +31,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  validates_attachment :avatar, size: { in: 0..2000.kilobytes }
 end
